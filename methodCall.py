@@ -9,7 +9,6 @@ def userIDmod(str):
 	str2 = str.replace("@","%40")
 	return str2
 
-
 def urlconcat(method,bbox):
 	url = "https://api.flickr.com/services/rest/?method=" + method + \
 	"&api_key=c5ffff1a95a4ab5a9e440d76ad56f247&bbox="+ bbox + \
@@ -21,3 +20,6 @@ r = urlopen(urlconcat("flickr.photos.search",".skCPTpTVr.Q3WKW"))
 text = r.read()
 
 print(text)
+
+json_string = '{"Huy":"Awesome", "second" : "Rossum"}'
+print(r['37623919984'])
