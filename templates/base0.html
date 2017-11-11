@@ -1,21 +1,11 @@
-{% extends "bootstrap/base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-
+<!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY2u-8_R0JTyE3gDtOfvCM9FWbI6isbD0&callback=initMap"
-  type="text/javascript">
-</script>
-<style>
-       #map {
-        height: 400px;
-        width: 100%;
-       }
-    </style>
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-inverse" role="navigation">
         <div class="container">
             <div class="navbar_header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,7 +23,9 @@
             </div>
         </div>
     </div>
+
 {% block content %}
 {% endblock %}
+
 </body>
 </html>
