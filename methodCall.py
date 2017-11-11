@@ -48,6 +48,14 @@ parsed_response = json.loads(text)
 
 #creating a dictionary from the json file from first url call
 
+d = {}
+for i in range(5):
+	d[getPhotoID(i)] = [getPhotoLat(i), getPhotoLong(i)]
+
+print(d)
+
+
+	
 
 
 # PhotoLat = getPhotoLat(0)
