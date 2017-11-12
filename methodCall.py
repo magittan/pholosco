@@ -31,9 +31,11 @@ class Photo:
 	def get_farm_id(self):
 		return self.__farm_id
 
-	def get_seccret(self):
+	def get_secret(self):
 		return self.__seccret
 
+	def __str__(self):
+		return str(self.get_photo_id())
 
 def userIDmod(str):
 	str2 = str.replace("@","%40")
@@ -49,26 +51,27 @@ parsed_response = json.loads(text)
 check = json.dumps(parsed_response, indent=4, sort_keys=True)
 print(check)
 
-for i in range(4):
+for i in range(5):
 	id = parsed_response["photos"]["photo"][i]['id']
-	print(id)
-	# farm = parsed_response["photos"]["photo"][i]['farm']
-	# secret = parsed_response["photos"]["photo"][i]['secret']
-	# server = parsed_response["photos"]["photo"][i]['server']
+	#print(id)
+	farm = parsed_response["photos"]["photo"][i]['farm']
+	secret = parsed_response["photos"]["photo"][i]['secret']
+	server = parsed_response["photos"]["photo"][i]['server']
 
-	# url2 = 'https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation' + \
-	# '&api_key=c5ffff1a95a4ab5a9e440d76ad56f247&photo_id='+ id + '&format=json&nojsoncallback=1'
-	# r2 = urlopen(url2)
-	# text2 = r2.read()
-	# parsed_response2 = json.loads(text2)
+	url2 = 'https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation' + \
+	'&api_key=c5ffff1a95a4ab5a9e440d76ad56f247&photo_id='+ id + '&format=json&nojsoncallback=1'
+	r2 = urlopen(url2)
+	text2 = r2.read()
+	parsed_response2 = json.loads(text2)
 
-	# lat = parsed_response2["photo"]["location"]["latitude"]
-	# longi = parsed_response2["photo"]["location"]["longitude"]
-	# print (i)
+	lat = parsed_response2["photo"]["location"]["latitude"]
+	longi = parsed_response2["photo"]["location"]["longitude"]
+	#print (i)
 
-	# photoInfo[i] = Photo(id,lat,longi,server,farm,secret)
+	photoInfo.append(Photo(id,lat,longi,server,farm,secret))
 
 
+print(photoInfo[2])
 #TODELETE dictionary
 # d = {}
 # for i in range(5):
