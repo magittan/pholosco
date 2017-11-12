@@ -23,7 +23,6 @@ def index():
     if 'username' in session:
         print('check')
         return 'You are logged in as' + session['username']
-
     return render_template('home.html')
 
 @app.route('/login', methods=['GET', 'POST'])
