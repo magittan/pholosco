@@ -2,13 +2,13 @@ Search:
 https://www.flickr.com/services/api/explore/flickr.photos.search
 	argument: .skCPTpTVr.Q3WKW
 	argument: bbox (Optional)
-		A comma-delimited list of 4 values defining the Bounding Box of the area that will be searched. 
-		The 4 values represent the bottom-left corner of the box and the top-right corner, minimum_longitude, minimum_latitude, maximum_longitude, maximum_latitude. 
-		Longitude has a range of -180 to 180 , latitude of -90 to 90. Defaults to -180, -90, 180, 90 if not specified. 
-		Unlike standard photo queries, geo (or bounding box) queries will only return 250 results per page. 
-	argument: 
+		A comma-delimited list of 4 values defining the Bounding Box of the area that will be searched.
+		The 4 values represent the bottom-left corner of the box and the top-right corner, minimum_longitude, minimum_latitude, maximum_longitude, maximum_latitude.
+		Longitude has a range of -180 to 180 , latitude of -90 to 90. Defaults to -180, -90, 180, 90 if not specified.
+		Unlike standard photo queries, geo (or bounding box) queries will only return 250 results per page.
+	argument:
 
-result: user IDs, photo ID's. Both will be paired together.  
+result: user IDs, photo ID's. Both will be paired together.
 
 Interesting
 https://www.flickr.com/services/api/flickr.interestingness.getList.htm
@@ -18,11 +18,11 @@ Loop through owners (user id's) and see if any match with interesting user id's
 
 Get Photo Geo location
 https://www.flickr.com/services/api/flickr.photos.geo.getLocation.html
-required: use photo ID from first search if match through interesting user ID found. 
+required: use photo ID from first search if match through interesting user ID found.
 	result:
-		Lat - 
-		Long - 
-Generate arrays of lats and longs and add into JS function in base page. 
+		Lat -
+		Long -
+Generate arrays of lats and longs and add into JS function in base page.
 
 ----------------------------------------------------------------------------
 Photos
@@ -40,4 +40,4 @@ https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{o-secret}_o.(jpg|gif|pn
 
 ---------------------------------------------------------------------------------
 https://www.flickr.com/services/api/explore/flickr.photos.getSizes
-from flickr.photos.getSizes, you can get the static jpeg image 
+from flickr.photos.getSizes, you can get the static jpeg image
