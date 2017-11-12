@@ -1,28 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-<body>
-  <form>
-    {% if current_user.is_authenticated %}
-      Hi {{ current_user.name }}!
-    {% endif %}
-  </form>
-  <h3>FOLOSCO</h3>
-      <div id="map"></div>
-      <script>
-        function initMap() {
-          var manhattan = {lat: 40.7831, lng: -73.9712};
-          var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 11,
-            center: manhattan
-          });
-          /*
-          var marker = new google.maps.Marker({
-            position: manhattan,
-            map: map
-          });
-          */
-
-        }
-      </script>
-</body>
+<h3>FOLOSCO</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var manhattan = {lat: 40.7831, lng: -73.9712};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 11,
+          center: manhattan
+        });
+        /*
+        var marker = new google.maps.Marker({
+          position: manhattan,
+          map: map
+        });
+        */
+      }
+    </script>
 {% endblock %}
