@@ -86,6 +86,9 @@ def signup():
         return '<h1>' + form.email.data + ' ' + form.password.data + '</h1>'
     return render_template('signup.html', form = form)
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
 if __name__ == '__main__':
     app.secret_key = 'mysecret'
     app.run('0.0.0.0',debug=True)
