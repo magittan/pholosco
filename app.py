@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, session, redirect
+from flask import Flask, render_template, url_for, request, session, redirect, json
 from flask_login import LoginManager, UserMixin
 from flask_bootstrap import Bootstrap
 from methodCall import Photo
@@ -22,10 +22,15 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-    if 'username' in session:
-        print('check')
-        return 'You are logged in as' + session['username']
-    return render_template('home.html')
+    # if 'username' in session:
+    #     print('check')
+    #     return 'You are logged in as' + session['username']
+    mainP = mainPhoto()
+    photos = mainP.getData(5)
+    dataForUse = {}
+    for i in photos:
+        dataForUse[i.get_photo_id()] = [i.get_latitude(),i.get_longitude()]
+    return render_template('home.html', dataForUse=json.dumps(dataForUse))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

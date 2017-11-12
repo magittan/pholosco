@@ -1,17 +1,58 @@
 {% extends "base.html" %}
 {% block content %}
-
+<style>
+#map {
+     height: 600px;
+     width: 66%;
+     float: right;
+     margin-right: 50px;}
+</style>
 <h3>FOLOSCO</h3>
     <div id="map"></div>
     <script>
       function initMap() {
-        var manhattan = {lat: 40.7831, lng: -73.9712};
+        var manhattan = {lat: 40.76, lng: -73.9712};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
+          zoom: 12,
           center: manhattan
         });
 var varlat;
 var varlong;
+var temp = [];
+var points;
+
+var heatMapData =[];
+  var myLatLNG1;
+var map, heatmap;
+var coord;
+function test_func(dataForUse) {
+        console.log(dataForUse);
+        temp = dataForUse;
+    }
+   test_func({{ dataForUse|safe }});
+   for(var key in (temp)) {
+    var value = temp[key];
+    varLat = value[0];
+    varLong = value[1];
+
+     myLatLNG1 = {lat: parseFloat(varLat), lng: parseFloat(varLong)};
+  /*  var marker = new google.maps.Marker({
+          position: myLatLNG1,
+          map: map,
+          title: 'Hello World!'
+        }); */
+        var cityCircle = new google.maps.Circle({
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35,
+              map: map,
+              center: myLatLNG1,
+              radius: 160});
+
+
+      }
 
  google.maps.event.addDomListener(map, 'click', function(event) {
 
@@ -19,31 +60,15 @@ var varlong;
         varlat = latLng.lat();
         varlong = latLng.lng();
 
-        if (((varlat-40) < 0.80) && ((varlat-40) > 0.785))
-        {
-          document.getElementById("firstImage").src = "http://www.wallpapersbyte.com/wp-content/uploads/2015/07/New-York-City-Central-Park-Lake-Top-View-Skyscrapers-WallpapersByte-com-1920x1080.jpg"
-        }
-        else
-        {
-          console.log("fail")
-        }
-
 
        console.log(varlat+" "+varlong);
         //data
-        var heatMapData = [{location: latLng, weight: 20.0}];
 
-        var heatmap = new google.maps.visualization.HeatmapLayer({
-        data: heatMapData
-        });
-heatmap.setMap(map);
+
   });
 }
-
-
 </script>
-
-
+<p id="demo"></p>
 <div style="width: 30%" on>   <div class="container" >      <div
 id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 35%;
 height: 200px; float: left;">       <!-- Indicators -->       <ol class
