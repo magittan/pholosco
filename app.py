@@ -46,7 +46,7 @@ def index():
     #     print('check')
     #     return 'You are logged in as' + session['username']
     mainP = mainPhoto()
-    photos = mainP.getData(5)
+    photos = mainP.getData(100)
     dataForUse = {}
     for i in photos:
         dataForUse[i.get_photo_id()] = [i.get_latitude(),i.get_longitude()]
