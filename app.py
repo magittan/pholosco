@@ -1,6 +1,8 @@
 from flask import Flask, render_template, url_for, request, session, redirect
 from flask_login import LoginManager, UserMixin
 from flask_bootstrap import Bootstrap
+from methodCall import Photo
+from methodCall import mainPhoto
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
