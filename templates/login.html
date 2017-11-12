@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
   <html>
   <head>
@@ -17,21 +16,23 @@
       }
 
       body {
-        background: #3c2821;
+        background: #d7ccc8;
+        background-image: url('bok.gif');
+        background-size: cover;
       }
 
       .input-field input[type=date]:focus + label,
       .input-field input[type=text]:focus + label,
       .input-field input[type=email]:focus + label,
       .input-field input[type=password]:focus + label {
-        color: #e6d7ba;
+        color: #7f98ac;
       }
 
       .input-field input[type=date]:focus,
       .input-field input[type=text]:focus,
       .input-field input[type=email]:focus,
       .input-field input[type=password]:focus {
-        border-bottom: 2px solid #e6d7ba;
+        border-bottom: 2px solid #7f98ac;
         box-shadow: none;
       }
     </style>
@@ -43,7 +44,7 @@
       <center>
         <div class="section"></div>
 
-        <h5 class="indigo-text">Please, login into your account</h5>
+        <img src="logowhite.gif" alt="logowhite" style="width:700px">
         <div class="section"></div>
 
         <div class="container">
@@ -68,20 +69,20 @@
                   <label for='password'>Enter your password</label>
                 </div>
                 <label style='float: right;'>
-                  <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+                  <a class='purple-text' href='#!'><b>Forgot Password?</b></a>
                 </label>
               </div>
 
               <br />
               <center>
                 <div class='row'>
-                  <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+                  <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect purple'>Login</button>
                 </div>
               </center>
             </form>
           </div>
         </div>
-        <a href="#!">Create account</a>
+        <a class='white-text' href="#!">Create account</a>
       </center>
 
       <div class="section"></div>

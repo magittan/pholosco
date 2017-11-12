@@ -10,11 +10,15 @@
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBY2u-8_R0JTyE3gDtOfvCM9FWbI6isbD0&callback=initMap"
     type="text/javascript">
   </script>
+  <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
 </head>
 <body>
-<script type="text/javascript">
 
-</script>
+<style type="text/css">
+    #huyFONT{
+      font-family: 'Barlow', sans-serif;
+    }
+</style>
 <div class="navbar navbar-inverse" role="navigation">
         <div class="container">
             <div class="navbar_header">
@@ -25,9 +29,10 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav" style="color: blue">
-                    <li><a href="{{ url_for('index') }}">Home</a></li>
+            <div class="navbar-collapse collapse" id="huyFONT">
+                <ul class="nav navbar-nav" >
+                    <li><img src="logowhite.GIF"></li>
+                    <li><a href="{{ url_for('index') }}">Map</a></li>
                     <li><a href="{{ url_for('explore') }}">Explore</a></li>
                     <li><a href="{{ url_for('login') }}">Login</a></li>
                     <li><a href="{{ url_for('profile') }}">Profile</a></li>
