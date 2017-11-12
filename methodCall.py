@@ -44,7 +44,7 @@ class mainPhoto:
 	def getData(self, number):
 		#get photos id then convert into python list
 		photoInfo = []
-		url1 = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=c5ffff1a95a4ab5a9e440d76ad56f247&place_id=.skCPTpTVr.Q3WKW&per_page=5&page=1&format=json&nojsoncallback=1"
+		url1 = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=c5ffff1a95a4ab5a9e440d76ad56f247&place_id=.skCPTpTVr.Q3WKW&per_page=100&page=1&format=json&nojsoncallback=1"
 		r = urlopen(url1)
 		text = r.read()
 		parsed_response = json.loads(text)
