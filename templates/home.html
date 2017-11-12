@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvTl_sKQIwCd-jmczGj66DJwQcQ1rKOs&libraries=visualization&callback=initMap"type="text/javascript"> </script>
 <style>
 #map {
-     height: 600px;
+     height: 500px;
      width: 66%;
      float: right;
      margin-right: 50px;}
 </style>
-<h3>FOLOSCO</h3>
     <div id="map"></div>
     <script>
       function initMap() {
@@ -30,7 +30,7 @@ function test_func(dataForUse) {
         temp = dataForUse;
     }
    test_func({{ dataForUse|safe }});
-   for(var key in (temp)) {
+   for(var key in temp) {
     var value = temp[key];
     varLat = value[0];
     varLong = value[1];
@@ -50,8 +50,6 @@ function test_func(dataForUse) {
               map: map,
               center: myLatLNG1,
               radius: 160});
-
-
       }
 
  google.maps.event.addDomListener(map, 'click', function(event) {
