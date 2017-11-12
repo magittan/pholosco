@@ -3,9 +3,9 @@ import json
 
 
 class Photo:
-	
-	def __init__ (self,id, lat,longi,serverID, farmID,secr):
-		self.__photo_id = id
+
+	def __init__ (self,it, lat,longi,serverID, farmID,secr):
+		self.__photo_id = it
 		self.__latitude = lat
 		self.__longitude = longi
 		self.__server_id = serverID
@@ -35,15 +35,13 @@ class Photo:
 
 
 class mainPhoto:
-	
-	apiKey = "c5ffff1a95a4ab5a9e440d76ad56f247"
-	api_secret = "1bdc766eee4d312f"
-	
-	# def userIDmod(str):
-	# 	str2 = str.replace("@","%40")
-	# 	return str2
 
-	def getData():
+
+	def __init__ (self):
+		self.apiKey = "c5ffff1a95a4ab5a9e440d76ad56f247"
+
+
+	def getData(self, number):
 		#get photos id then convert into python list
 		photoInfo = []
 		url1 = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=c5ffff1a95a4ab5a9e440d76ad56f247&place_id=.skCPTpTVr.Q3WKW&per_page=5&page=1&format=json&nojsoncallback=1"
@@ -51,18 +49,18 @@ class mainPhoto:
 		text = r.read()
 		parsed_response = json.loads(text)
 
-		check = json.dumps(parsed_response, indent=4, sort_keys=True)
-		print(check)
+		# check = json.dumps(parsed_response, indent=4, sort_keys=True)
+		# print(check)
 
-		for i in range(5):
-			id = parsed_response["photos"]["photo"][i]['id']
+		for i in range(number):
+			it = parsed_response["photos"]["photo"][i]['id']
 			#print(id)
 			farm = parsed_response["photos"]["photo"][i]['farm']
 			secret = parsed_response["photos"]["photo"][i]['secret']
 			server = parsed_response["photos"]["photo"][i]['server']
 
 			url2 = 'https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation' + \
-			'&api_key=c5ffff1a95a4ab5a9e440d76ad56f247&photo_id='+ id + '&format=json&nojsoncallback=1'
+			'&api_key=c5ffff1a95a4ab5a9e440d76ad56f247&photo_id='+ it + '&format=json&nojsoncallback=1'
 			r2 = urlopen(url2)
 			text2 = r2.read()
 			parsed_response2 = json.loads(text2)
@@ -71,9 +69,5 @@ class mainPhoto:
 			longi = parsed_response2["photo"]["location"]["longitude"]
 			#print (i)
 
-			photoInfo.append(Photo(id,lat,longi,server,farm,secret))
+			photoInfo.append(Photo(it,lat,longi,server,farm,secret))
 		return photoInfo
-
-mainPhoto.getData()
-
-
