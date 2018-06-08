@@ -1,5 +1,7 @@
 from urllib.request import urlopen
+from bs4 import BeautifulSoup
 import json
+import requests
 
 
 class Photo:
@@ -40,11 +42,16 @@ class mainPhoto:
 	def __init__ (self):
 		self.apiKey = "c5ffff1a95a4ab5a9e440d76ad56f247"
 
+	
 
-	def getData(self, number):
+
+	def getData(self, place, number):
 		#get photos id then convert into python list
 		photoInfo = []
-		url1 = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=c5ffff1a95a4ab5a9e440d76ad56f247&place_id=.skCPTpTVr.Q3WKW&per_page=100&page=1&format=json&nojsoncallback=1"
+		ls = locationServices()
+		print('placeeeeeeeeeeeeee')
+		print (place)
+		url1 = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=c5ffff1a95a4ab5a9e440d76ad56f247&place_id="+place+"&per_page=100&page=1&format=json&nojsoncallback=1"
 		r = urlopen(url1)
 		text = r.read()
 		parsed_response = json.loads(text)
@@ -71,3 +78,14 @@ class mainPhoto:
 
 			photoInfo.append(Photo(it,lat,longi,server,farm,secret))
 		return photoInfo
+		
+class locationServices:		
+	def try_location(self, name):
+			url_loc = requests.get('https://api.flickr.com/services/rest/?method=flickr.places.find&api_key=c5ffff1a95a4ab5a9e440d76ad56f247&query='+name+'&format=rest')
+			tampa = url_loc.text
+			soup = BeautifulSoup (tampa, 'html.parser')
+			foo = str(soup)
+			place_index = (foo.find('place_id'))
+			place_id_user = foo[place_index+10:place_index+26]
+			return (place_id_user)
+

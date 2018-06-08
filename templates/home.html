@@ -1,41 +1,49 @@
 {% extends "base.html" %}
 {% block content %}
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtvTl_sKQIwCd-jmczGj66DJwQcQ1rKOs&libraries=visualization&callback=initMap"type="text/javascript"> </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAF1LsdlbXpfEI1sx8WK4VqvMpbsKowHRE&libraries=visualization&callback=initMap" type="text/javascript"> </script>
 <style>
 #map {
      height: 500px;
      width: 66%;
      float: right;
-     margin-right: 50px;}
+     margin-right: 50px;
+   }
 </style>
     <div id="map"></div>
     <script>
-      function initMap() {
-        var manhattan = {lat: 40.76, lng: -73.9712};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12,
-          center: manhattan
-        });
-var varlat;
-var varlong;
-var temp = [];
-var points;
+    var map;
+    var startLoc;
+    var varlat;
+      var varlong;
+      var temp = [];
+      var points;
 
-var heatMapData =[];
-  var myLatLNG1;
-var map, heatmap;
-var coord;
+      var heatMapData =[];
+      var myLatLNG1;
+      var map, heatmap, map2;
+      var coord;
+
+   var count =0;
+
+      function initMap() {
+        startLoc = {lat: 41.850033, lng: -87.6500523};//center of usa
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 3,
+          center: startLoc,
+        });
+      
+
 function test_func(dataForUse) {
-        console.log(dataForUse);
         temp = dataForUse;
+        console.log(temp)
     }
    test_func({{ dataForUse|safe }});
    for(var key in temp) {
     var value = temp[key];
     varLat = value[0];
     varLong = value[1];
-
      myLatLNG1 = {lat: parseFloat(varLat), lng: parseFloat(varLong)};
+
   /*  var marker = new google.maps.Marker({
           position: myLatLNG1,
           map: map,
@@ -49,9 +57,14 @@ function test_func(dataForUse) {
               fillOpacity: 0.35,
               map: map,
               center: myLatLNG1,
-              radius: 160});
+              radius: 25});
+      count = count+1;
       }
+      startLoc = myLatLNG1;
 
+      if (count == 100){
+        newCenter()
+      }
  google.maps.event.addDomListener(map, 'click', function(event) {
 
         var latLng = event.latLng;
@@ -65,17 +78,28 @@ function test_func(dataForUse) {
 
   });
 }
-</script>
-<p id="demo"></p>
-<div style="width: 30%" on>   <div class="container" >      <div
-id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 35%;
-height: 200px; float: left;">       <!-- Indicators -->       <ol class
-="carousel-indicators">         <li data-target="#myCarousel" data-slide-
-to="0" class="active"></li>         <li data-target="#myCarousel" data-slide-
-to="1"></li>         <li data-target="#myCarousel" data-slide-to="2"></li>
-</ol>
+function newCenter(){
+  map.setCenter(startLoc);
+  map.setZoom(12);
+}
 
-      <!-- Wrapper for slides -->
+</script>
+<form action="{{ url_for('index') }}" method="post">
+    Search for your city! <input type="text" name="projectFilePath"><br>
+    <input type="submit" value="Submit" onclick="initMap()" onsubmit="return false" id="submitBtn">
+</form>
+<!--
+<p id="demo"></p>
+<div style="width: 30%" on>   
+  <div class="container" >      
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 35%; height: 200px; float: left;">            
+  <ol class ="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>         
+    <li data-target="#myCarousel" data-slide-to="1"></li>         
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+
+     
       <div class="carousel-inner" >
         <div class="item active">
           <img src="http://beastmotivation.com/file/2015/11/Grey-Gradient-Background.jpg" alt="pic 1" style="width:100%;" id="firstImage">
@@ -90,7 +114,7 @@ to="1"></li>         <li data-target="#myCarousel" data-slide-to="2"></li>
         </div>
       </div>
 
-      <!-- Left and right controls -->
+      
       <a class="left carousel-control" href="#myCarousel" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left"></span>
         <span class="sr-only">Previous</span>
@@ -102,4 +126,5 @@ to="1"></li>         <li data-target="#myCarousel" data-slide-to="2"></li>
     </div>
   </div>
 </div>
+-->
 {% endblock %}
