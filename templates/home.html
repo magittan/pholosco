@@ -43,6 +43,7 @@ function test_func(dataForUse) {
         temp = dataForUse;
     }
    test_func({{ dataForUse|safe }});
+   infowindow = new google.maps.InfoWindow();
    for(var key in temp) {
     var value = temp[key];
     varLat = value[0];
@@ -67,15 +68,14 @@ function test_func(dataForUse) {
               fillColor: '#FF0000',
               fillOpacity: 0.35,
               map: map,
+              number: count,
               clickable: true,
               center: myLatLNG1,
               radius: 25});
       
       
       contentString[count] = "<div style='float:left'><img src="+image[key]+"'></div><div style='float:right; padding: 10px;'><b>Title</b><br/>123 Address<br/> City,Country</div>";
-      infowindow = new google.maps.InfoWindow({
-      content: contentString[count],
-      });
+      
       openWindow();
       count = count+1;
     }
@@ -93,12 +93,15 @@ function newCenter(){
 }
 
 function openWindow(){
+
   google.maps.event.addListener(cityCircle,'click', (function(cityCircle,content,infowindow){ 
         return function() {
             infowindow.setOptions({
-        map:  map,
-        position: cityCircle.center
-      });
+              map:  map,
+              position: cityCircle.center,
+              content: contentString[cityCircle.number]
+              });
+            
           };
     })(cityCircle,content,infowindow));
 }
