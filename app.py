@@ -58,10 +58,11 @@ def map():
 	place = tryLoc.try_location(processed_text)
 	#print(place) good
 	mainP = mainPhoto()
-	photos = mainP.getData(place, 50)
+	photos = mainP.getData(place, 20)
 	dataForUse = {}
 	for i in photos:
-		dataForUse[i.get_photo_id()] = [i.get_latitude(),i.get_longitude()]
+		#https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+		dataForUse[i.get_photo_id()] = [i.get_latitude(),i.get_longitude(), i.get_farm_id(), i.get_server_id(), i.get_secret(), i.get_photo_id()]
 	return render_template('home.html', dataForUse=json.dumps(dataForUse), place = json.dumps(place))
 
 @app.route('/login', methods=['GET', 'POST'])

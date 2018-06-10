@@ -22,6 +22,12 @@
       var myLatLNG1;
       var map, heatmap, map2;
       var coord;
+      var farm, server, secret, photoID;
+      var image =[];
+      var content;
+      var contentString = [];
+      var infowindow;
+      var cityCircle;
 
    var count =0;
 
@@ -35,13 +41,18 @@
 
 function test_func(dataForUse) {
         temp = dataForUse;
-        console.log(temp)
     }
    test_func({{ dataForUse|safe }});
    for(var key in temp) {
     var value = temp[key];
     varLat = value[0];
     varLong = value[1];
+    farm = value[2];
+    server = value[3];
+    secret =  value[4];
+    photoID = value[5];
+    //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+    image[key] = 'https://farm'+farm+'.staticflickr.com/'+server+'/'+photoID+'_'+secret+'.jpg';
      myLatLNG1 = {lat: parseFloat(varLat), lng: parseFloat(varLong)};
 
   /*  var marker = new google.maps.Marker({
@@ -49,38 +60,47 @@ function test_func(dataForUse) {
           map: map,
           title: 'Hello World!'
         }); */
-        var cityCircle = new google.maps.Circle({
+        cityCircle = new google.maps.Circle({
               strokeColor: '#FF0000',
               strokeOpacity: 0.8,
               strokeWeight: 2,
               fillColor: '#FF0000',
               fillOpacity: 0.35,
               map: map,
+              clickable: true,
               center: myLatLNG1,
               radius: 25});
+      
+      
+      contentString[count] = "<div style='float:left'><img src="+image[key]+"'></div><div style='float:right; padding: 10px;'><b>Title</b><br/>123 Address<br/> City,Country</div>";
+      infowindow = new google.maps.InfoWindow({
+      content: contentString[count],
+      });
+      openWindow();
       count = count+1;
-      }
+    }
       startLoc = myLatLNG1;
 
-      if (count == 100){
+      if (count == 20){
         newCenter()
+        
       }
- google.maps.event.addDomListener(map, 'click', function(event) {
 
-        var latLng = event.latLng;
-        varlat = latLng.lat();
-        varlong = latLng.lng();
-
-
-       console.log(varlat+" "+varlong);
-        //data
-
-
-  });
 }
 function newCenter(){
   map.setCenter(startLoc);
   map.setZoom(12);
+}
+
+function openWindow(){
+  google.maps.event.addListener(cityCircle,'click', (function(cityCircle,content,infowindow){ 
+        return function() {
+            infowindow.setOptions({
+        map:  map,
+        position: cityCircle.center
+      });
+          };
+    })(cityCircle,content,infowindow));
 }
 
 </script>
